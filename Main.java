@@ -11,7 +11,7 @@ public class Main {
 	
 	 AddressBook book = new AddressBook();
 	 book.addContact();
-	 book.editDetails();
+	 System.out.println(book.editDetails());
 		
 	}
 
