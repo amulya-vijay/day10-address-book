@@ -79,6 +79,22 @@ public class AddressBook implements ContactDetails{
 		
 	}
 	
+	public String deleteContact() {
+		String ipName1;
+		String ipName2;
+		System.out.println("Enter first name:");
+		ipName1 = sc.nextLine();
+		System.out.println("Enter last name:");
+		ipName2 = sc.nextLine();
+		if(ipName1.equals(contactsList.get(0).getFirstName()) && ipName2.equals(contactsList.get(0).getLastName())) {
+			contactsList.remove(0);
+			return "Contact Deleted!";
+		}else {
+			
+			return "No contact found in the book.";
+		}
+	}
+	
 	public void getContact() {
 		for(int i=0;i<numOfContacts;i++) {
 			ContactInfo cInfo = contactsList.get(i);
@@ -86,11 +102,13 @@ public class AddressBook implements ContactDetails{
 		}
 	}
 
-
 	@Override
 	public void addContact(String firstName, String lastName, Address address, long phoneNum, String email) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 
 }
