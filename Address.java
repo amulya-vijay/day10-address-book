@@ -7,6 +7,14 @@ public class Address {
 	private String state;
 	private int zip;
 
+	public Address(String area, String city, String state, int zip) {
+		
+		this.area = area;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		
+	}
 	public String getArea() {
 		return area;
 	}
