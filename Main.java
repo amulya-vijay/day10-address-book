@@ -12,7 +12,7 @@ public class Main {
 	 AddressBook book = new AddressBook();
 	 book.addContact();
 	 System.out.println(book.editDetails());
-		
+	 System.out.println(book.deleteContact());
 	}
 
 }
