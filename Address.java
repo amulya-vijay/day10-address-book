@@ -15,6 +15,7 @@ public class Address {
 		this.zip = zip;
 		
 	}
+	
 	public String getArea() {
 		return area;
 	}
