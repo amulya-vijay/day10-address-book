@@ -1,18 +1,20 @@
 package com.addressBook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 interface ContactDetails{
-	public void addContact(String firstName, String lastName, Address address, long phoneNum, String email);
-
+	
 	void addContact();
 }
 public class AddressBook implements ContactDetails{
 	
-	static int numOfContacts =0;
-	static  List<ContactInfo> contactsList = new ArrayList<ContactInfo>();
-	 
+	static int numOfContacts = Main.numberOfContacts;
+	static List<ContactInfo> contactsList = new ArrayList<ContactInfo>();
+	static List<Address> addressInfo = new ArrayList<Address>();
+	static Map<ContactInfo,Address> completeDetails = new HashMap<ContactInfo, Address>();
 	 Scanner sc =  new Scanner(System.in);
 	
 	@Override
@@ -37,49 +39,52 @@ public class AddressBook implements ContactDetails{
 		Address contact1 = new Address(area,city,state,zip);
 		ContactInfo contactInfo =  new ContactInfo(fName, lName,contact1, phoneNum, email);
 		contactsList.add(contactInfo);
-		numOfContacts++;
-		getContact();
+		addressInfo.add(contact1);
+		completeDetails.put(contactInfo,contact1);
+		System.out.println(completeDetails);
+		//getContact();
 	}
 	
+	@SuppressWarnings("unused")
 	public String editDetails() {
-		
+		sc.nextLine();
 		String inputName;
-		System.out.println("Enter first name:");
+		System.out.println("Enter First name:");
 		inputName = sc.nextLine();
-		String area = null;
-		String city = null;
-		String state = null;
-		int zip = 0;
-		Address newAddress = new Address(area,city,state,zip);
-		if(inputName.equals(contactsList.get(0).getFirstName())) {
-			
+		for(int i=1; i<=numOfContacts;i++) {
+		if(inputName.equals(contactsList.get(i).getFirstName())) {
+			System.out.println("Enter new data:");
 			System.out.println("Enter FirstName");
-			contactsList.get(0).setFirstName(sc.next());
+			contactsList.get(i).setFirstName(sc.next());
 			System.out.println("Enter LastName");
-			contactsList.get(0).setLastName(sc.next());
+			contactsList.get(i).setLastName(sc.next());
 			System.out.println("Enter Area");
-			newAddress.setArea(sc.next());
+			addressInfo.get(i).setArea(sc.next());
 			System.out.println("Enter City");
-			newAddress.setCity(sc.next());
+			addressInfo.get(i).setCity(sc.next());
 			System.out.println("Enter State");
-			newAddress.setState(sc.next());
+			addressInfo.get(i).setState(sc.next());
 			System.out.println("Enter zip");
-			newAddress.setZip(sc.nextInt());
+			addressInfo.get(i).setZip(sc.nextInt());
 			System.out.println("Enter PhoneNumber"); 
-			contactsList.get(0).setPhoneNum(sc.nextInt());
+			contactsList.get(i).setPhoneNum(sc.nextLong());
 			System.out.println("Enter Email");
-			contactsList.get(0).setEmail(sc.next());
+			contactsList.get(i).setEmail(sc.next());
+			System.out.println(contactsList.get(i));
+			System.out.println(addressInfo.get(i));
 			
-			System.out.println(contactsList.get(0));
 			return "Edited";
 		}else {
 			
 			return "No contact found in the book.";
 		}
+		}
+		return null;
 		
 	}
 	
 	public String deleteContact() {
+		sc.nextLine();
 		String ipName1;
 		String ipName2;
 		System.out.println("Enter first name:");
@@ -102,11 +107,7 @@ public class AddressBook implements ContactDetails{
 		}
 	}
 
-	@Override
-	public void addContact(String firstName, String lastName, Address address, long phoneNum, String email) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 
